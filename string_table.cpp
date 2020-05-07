@@ -1,12 +1,17 @@
 #include <string>
+#include <climits>
+#include "code.h"
 #include "string_table.h"
 
 using namespace std;
 
 StringTable::StringTable() {
-    // initializing the table
+    for (unsigned char b = 0; b < UCHAR_MAX; ++b) {
+        table[string(1, b)] = Code(byte(b));
+    }
+
 }
 
-void StringTable::addCode(const string &key) {
-
+Code const &StringTable::addCode(const string &key) {
+    return Code(); // TODO
 }
