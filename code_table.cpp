@@ -19,8 +19,8 @@ void CodeTable::updateValue(const unsigned short &code, const string &value) {
 }
 
 void CodeTable::putValue(const string &value) {
-    unsigned short code = size();
-    if (code <= MAX_CODE) {
-        table[code] = value;
+    unsigned short newCode = getLastCode() + 1;
+    if (newCode <= MAX_CODE) {
+        table[newCode] = value;
     }
 }

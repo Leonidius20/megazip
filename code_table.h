@@ -19,8 +19,8 @@ public:
         return table.at(code);
     }
 
-    [[nodiscard]] size_t size() {
-        return table.size();
+    [[nodiscard]] unsigned short getLastCode() {
+        return table.size() - 1;
     }
 
     void updateValue(const unsigned short &code, const std::string &value);
