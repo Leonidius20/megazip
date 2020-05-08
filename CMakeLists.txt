@@ -3,4 +3,5 @@ project(megazip)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(megazip main.cpp string_table.cpp string_table.h packer.cpp packer.h unpacker.cpp unpacker.h)
+add_executable(megazip main.cpp string_table.cpp string_table.h packer.cpp packer.h unpacker.cpp unpacker.h
+        code_table.cpp code_table.h)
