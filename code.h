@@ -4,7 +4,7 @@
 #include <algorithm>
 #include <cmath>
 
-class Code {
+/*class Code {
     std::byte *bytes;
 
     static unsigned short NUMBER_OF_BYTES;
@@ -12,7 +12,7 @@ class Code {
     /*[[nodiscard]] static unsigned short getNumberOfBytes() {
         return std::ceil(NUMBER_OF_BITS / 8.0);
     }*/
-public:
+/*public:
 
 
     // friend class Input/OutputCodeStream
@@ -31,4 +31,4 @@ public:
     bool operator==(const Code &other) const;
 
     ~Code() { delete[] bytes; };
-};
+};*/

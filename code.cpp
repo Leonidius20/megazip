@@ -2,7 +2,7 @@
 #include <algorithm>
 #include "code.h"
 
-using namespace std;
+/*using namespace std;
 
 // unsigned short Code::NUMBER_OF_BITS = 12;
 unsigned short Code::NUMBER_OF_BYTES = 2;
@@ -22,4 +22,4 @@ Code::Code(const Code &other) : bytes(new byte[NUMBER_OF_BYTES]) {
 bool Code::operator==(const Code &other) const {
     if (bytes[0] != other.bytes[0]) return false;
     return static_cast<unsigned char>(bytes[1]) >> 4 == static_cast<unsigned char>(other.bytes[1]) >> 4;
-}
+}*/

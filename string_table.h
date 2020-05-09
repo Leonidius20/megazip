@@ -5,10 +5,12 @@
 #include <vector>
 #include <cstddef>
 #include <memory>
-#include "code.h"
+
+using Code = unsigned short;
 
 class StringTable {
     std::unordered_map<std::string, Code> table;
+    Code lastCode;
 public:
     StringTable();
 
@@ -16,5 +18,5 @@ public:
 
     [[nodiscard]] bool contains(const std::string &key) const { return table.contains(key); }
 
-    Code const &addCode(const std::string &key);
+    bool addCode(const std::string &key);
 };
