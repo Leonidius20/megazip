@@ -12,6 +12,7 @@ CodeInputStream &operator>>(CodeInputStream &stream, unsigned short &code) {
 
     if (stream.cachedCode != nullptr) {
         code = *stream.cachedCode;
+        delete stream.cachedCode;
         stream.cachedCode = nullptr;
     } else {
         int size = 3;
