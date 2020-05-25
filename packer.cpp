@@ -34,10 +34,9 @@ void pack(const vector<string> &files, const string &outputFile) {
 
     for (const string &file : files) {
         cout << "Processing file " << file << "... ";
-        int fileNameLength = file.length();
-        fileStream.write(reinterpret_cast<const char *>(&fileNameLength), 4);
+        codeStream.writeLittleEndian(file.length());
+        fileStream.write(file.c_str(), file.length());
 
-        fileStream.write(file.c_str(), fileNameLength);
         ifstream inputStream(file, ios::in);
         if (!inputStream.is_open()) {
             throw runtime_error("Could not open the file " + file);

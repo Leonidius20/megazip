@@ -21,3 +21,14 @@ void CodeOutputStream::flush() {
     stream.write(reinterpret_cast<const char *>(&savedCode), 2);
     bufferIsFree = true;
 }
+
+void CodeOutputStream::writeLittleEndian(uint32_t number) {
+    byte bytes[4];
+
+    bytes[0] = byte(number >> 24u);
+    bytes[1] = byte((number >> 16u) & 0xFFu);
+    bytes[2] = byte((number >> 8u) & 0xFFu);
+    bytes[3] = byte(number & 0xFFu);
+
+    stream.write(reinterpret_cast<const char *>(&bytes), 4);
+}

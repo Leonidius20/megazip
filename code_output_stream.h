@@ -14,4 +14,6 @@ public:
     void flush();
 
     void operator<<(const Code &code);
+
+    void writeLittleEndian(uint32_t number);
 };
