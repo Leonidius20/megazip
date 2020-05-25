@@ -13,9 +13,9 @@ void compress(istream &input, CodeOutputStream &output) {
     StringTable table;
     string currentPrefix;
 
-    unsigned char c;
+    char c;
     string currentString;
-    while (input >> c) {
+    while (input.get(c)) {
         currentString = currentPrefix + string(1, c); // move prob not needed here
         if (table.contains(currentString)) {
             currentPrefix = move(currentString);
@@ -28,14 +28,17 @@ void compress(istream &input, CodeOutputStream &output) {
 }
 
 void pack(const vector<string> &files, const string &outputFile) {
-    ofstream fileStream(outputFile, ios::binary);
+    ofstream fileStream(outputFile, ios::out | ios::trunc | ios::binary);
     if (!fileStream.is_open()) throw runtime_error("Could not open the output file");
     CodeOutputStream codeStream(fileStream);
 
     for (const string &file : files) {
         cout << "Processing file " << file << "... ";
-        fileStream << file.length() * sizeof(char) << file;
-        ifstream inputStream(file, ios::binary);
+        int fileNameLength = file.length();
+        fileStream.write(reinterpret_cast<const char *>(&fileNameLength), 4);
+
+        fileStream.write(file.c_str(), fileNameLength);
+        ifstream inputStream(file, ios::in | ios::binary);
         if (!inputStream.is_open()) {
             throw runtime_error("Could not open the file " + file);
         }
@@ -47,4 +50,6 @@ void pack(const vector<string> &files, const string &outputFile) {
     }
 
     fileStream.close();
+
+    cout << "Result written to " << outputFile << "." << endl;
 }

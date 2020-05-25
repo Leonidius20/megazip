@@ -4,7 +4,7 @@
 
 using namespace std;
 
-Code Code::END_OF_FILE = Code(pow(2,12) - 1);
+Code Code::END_OF_FILE = Code(0xFFF); // 12 ^ 2 - 1
 
 Code &Code::operator++() {
     bytes++;
