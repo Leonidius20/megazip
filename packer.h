@@ -8,4 +8,4 @@
 
 void compress(std::istream &input, CodeOutputStream &output);
 
-void pack(const std::vector<std::string> &files);
+void pack(const std::vector<std::string> &files, const std::string &outputFile);

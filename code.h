@@ -5,9 +5,16 @@
 #include <cmath>
 
 class Code {
+public:
+    static Code END_OF_FILE;
+private:
     unsigned short bytes = 0;
 public:
+    Code() = default;
+
     explicit Code(short bytes) : bytes((bytes >> 4u) << 4u) {};
+
+    Code &operator++();
 
     [[nodiscard]] unsigned short toShort() const { return bytes; };
 };
@@ -36,4 +43,4 @@ public:
     bool operator==(const Code &other) const;
 
     ~Code() { delete[] bytes; };
-};
+};*/

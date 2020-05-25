@@ -2,6 +2,15 @@
 #include <algorithm>
 #include "code.h"
 
+using namespace std;
+
+Code Code::END_OF_FILE = Code(pow(2,12) - 1);
+
+Code &Code::operator++() {
+    bytes++;
+    return *this;
+}
+
 /*using namespace std;
 
 // unsigned short Code::NUMBER_OF_BITS = 12;
