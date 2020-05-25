@@ -44,10 +44,10 @@ void pack(const vector<string> &files, const string &outputFile) {
         compress(inputStream, codeStream);
         inputStream.close();
         codeStream << Code::END_OF_FILE;
-        codeStream.flush(); // should it be here?
         cout << "Done." << endl;
     }
 
+    codeStream.flush();
     fileStream.close();
 
     cout << "Result written to " << outputFile << "." << endl;
