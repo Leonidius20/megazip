@@ -28,6 +28,6 @@ void compress(istream &input, CodeOutputStream &output) {
 
 void pack(const vector<string> &files) {
     for (const string &file : files) {
-        // TODO
+        // TODO open it as binary file!
     }
 }

@@ -5,8 +5,7 @@
 #include <vector>
 #include <cstddef>
 #include <memory>
-
-using Code = unsigned short;
+#include "code.h"
 
 class StringTable {
     std::unordered_map<std::string, Code> table;

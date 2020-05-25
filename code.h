@@ -4,10 +4,15 @@
 #include <algorithm>
 #include <cmath>
 
-/*class Code {
-    std::byte *bytes;
+class Code {
+    unsigned short bytes = 0;
+public:
+    explicit Code(short bytes) : bytes((bytes >> 4u) << 4u) {};
 
-    static unsigned short NUMBER_OF_BYTES;
+    [[nodiscard]] unsigned short toShort() const { return bytes; };
+};
+
+    //static unsigned short NUMBER_OF_BYTES;
     // static unsigned short NUMBER_OF_BITS;
     /*[[nodiscard]] static unsigned short getNumberOfBytes() {
         return std::ceil(NUMBER_OF_BITS / 8.0);
@@ -31,4 +36,4 @@
     bool operator==(const Code &other) const;
 
     ~Code() { delete[] bytes; };
-};*/
+};
