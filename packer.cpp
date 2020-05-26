@@ -35,13 +35,15 @@ void pack(const vector<string> &files, const string &outputFile) {
 
     for (const string &file : files) {
         cout << "Processing file " << file << "... ";
-        codeStream.writeLittleEndian(file.length());
-        fileStream.write(file.c_str(), file.length());
 
         ifstream inputStream(file, ios::in);
         if (!inputStream.is_open()) {
             throw runtime_error("Could not open the file " + file);
         }
+
+        codeStream.writeBigEndian(file.length());
+        fileStream.write(file.c_str(), file.length());
+
         compress(inputStream, codeStream);
         inputStream.close();
         codeStream << Code::END_OF_FILE;

@@ -24,7 +24,7 @@ void CodeOutputStream::flush() {
     *this << Code(0);
 }
 
-void CodeOutputStream::writeLittleEndian(uint32_t number) {
+void CodeOutputStream::writeBigEndian(uint32_t number) {
     byte bytes[4];
 
     bytes[0] = byte(number >> 24u);
