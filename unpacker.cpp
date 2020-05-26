@@ -19,9 +19,8 @@ void unpack(const string &file) {
     while (input.peek() != EOF) {
         unsigned int fileNameLength = readInt(input);
 
-        byte *fileNameBytes = new byte[fileNameLength];
-        input.read(reinterpret_cast<char *>(fileNameBytes), fileNameLength);
-        char *fileName(reinterpret_cast<char *>(fileNameBytes));
+        char *fileName = new char[fileNameLength + 1]; // +1 for '\0'
+        input.read(fileName, fileNameLength);
 
         cout << "Decompressing file " << fileName << "... ";
 
@@ -36,9 +35,11 @@ void unpack(const string &file) {
 
         decompress(codeStream, output);
 
+        output.close();
+
         cout << "Done.";
 
-        delete[] fileNameBytes;
+        delete[] fileName;
     }
 
     input.close();
