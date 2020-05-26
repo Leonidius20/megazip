@@ -2,7 +2,6 @@
 
 #include <ostream>
 #include "code.h"
-#include "string_table.h"
 
 class CodeOutputStream {
     std::ostream &stream;

@@ -5,6 +5,8 @@
 #include <stdexcept>
 #include <cmath>
 
+const unsigned char MAX_UCHAR = std::numeric_limits<unsigned char>::max();
+
 class Code {
     unsigned short bytes = 0;
 public:
@@ -25,3 +27,13 @@ public:
 
     [[nodiscard]] unsigned short toShort() const { return bytes; };
 };
+
+namespace std {
+
+    template<>
+    struct hash<Code> {
+        size_t operator()(const Code &key) const {
+            return hash<unsigned short>()(key.toShort());
+        }
+    };
+}

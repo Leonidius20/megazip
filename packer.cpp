@@ -15,7 +15,7 @@ void compress(istream &input, CodeOutputStream &output) {
 
     char c;
     string currentString;
-    while (input.get(c)) {
+    while (input.read(&c, 1)) {
         currentString = currentPrefix + string(1, c);
         if (table.contains(currentString)) {
             currentPrefix = move(currentString);
@@ -35,8 +35,9 @@ void pack(const vector<string> &files, const string &outputFile) {
 
     for (const string &file : files) {
         cout << "Processing file " << file << "... ";
+        cout.flush();
 
-        ifstream inputStream(file, ios::in);
+        ifstream inputStream(file, ios::in | ios::binary);
         if (!inputStream.is_open()) {
             throw runtime_error("Could not open the file " + file);
         }

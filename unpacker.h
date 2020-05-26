@@ -1,9 +1,9 @@
 #pragma once
 
-#include <istream>
-#include <ostream>
+#include "code_input_stream.h"
+#include <fstream>
 #include <string>
 
-void decompress(std::istream &input, std::ostream &output);
+void decompress(CodeInputStream &input, std::ofstream &output);
 
 void unpack(const std::string &file);
