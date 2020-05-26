@@ -20,8 +20,6 @@ public:
         return Code(table.size() - 1);
     }
 
-    void updateValue(const Code &code, const std::string &value);
-
     void putValue(const std::string &value);
 
     [[nodiscard]] bool contains(const Code &code) const { return table.contains(code); };
