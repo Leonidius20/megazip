@@ -8,9 +8,12 @@ void CodeOutputStream::operator<<(const Code &code) {
         bufferIsFree = false;
         return;
     } else {
-        short firstTwoBytes = savedCode.toShort() + (code.toShort() >> 12u);
-        unsigned char thirdByte = (code.toShort() & 0b0000111111111111u) >> 4u;
-        stream.write(reinterpret_cast<const char *>(&firstTwoBytes), 2);
+        byte firstByte = byte(savedCode.bytes >> 4u);
+        byte secondByte = byte(((savedCode.bytes & 0b000000001111u) << 4u) + (code.bytes >> 8u));
+        byte thirdByte = byte(code.bytes & 0b000011111111u);
+
+        stream.write(reinterpret_cast<const char *>(&firstByte), 1);
+        stream.write(reinterpret_cast<const char *>(&secondByte), 1);
         stream.write(reinterpret_cast<const char *>(&thirdByte), 1);
         bufferIsFree = true;
     }
@@ -18,8 +21,7 @@ void CodeOutputStream::operator<<(const Code &code) {
 
 void CodeOutputStream::flush() {
     if (bufferIsFree) return;
-    stream.write(reinterpret_cast<const char *>(&savedCode), 2);
-    bufferIsFree = true;
+    *this << Code(0);
 }
 
 void CodeOutputStream::writeLittleEndian(uint32_t number) {

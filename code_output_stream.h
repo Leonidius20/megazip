@@ -1,8 +1,8 @@
 #pragma once
 
 #include <ostream>
-#include "string_table.h"
 #include "code.h"
+#include "string_table.h"
 
 class CodeOutputStream {
     std::ostream &stream;

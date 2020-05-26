@@ -2,45 +2,26 @@
 
 #include <cstddef>
 #include <algorithm>
+#include <stdexcept>
 #include <cmath>
 
 class Code {
-public:
-    static Code END_OF_FILE;
-private:
     unsigned short bytes = 0;
 public:
+    friend class CodeOutputStream;
+
+    static Code END_OF_FILE;
+
     Code() = default;
 
-    explicit Code(short bytes) : bytes((bytes >> 4u) << 4u) {};
+    explicit Code(short bytes) {
+        if (bytes > pow(2, 12) - 1) throw std::invalid_argument("Code value is out of bounds");
+        this->bytes = bytes;
+    };
 
     Code &operator++();
 
+    bool operator==(const Code &other) const { return bytes == other.bytes; };
+
     [[nodiscard]] unsigned short toShort() const { return bytes; };
 };
-
-    //static unsigned short NUMBER_OF_BYTES;
-    // static unsigned short NUMBER_OF_BITS;
-    /*[[nodiscard]] static unsigned short getNumberOfBytes() {
-        return std::ceil(NUMBER_OF_BITS / 8.0);
-    }*/
-/*public:
-
-
-    // friend class Input/OutputCodeStream
-
-    explicit Code(std::byte first = std::byte(0), std::byte second = std::byte(0));
-
-    Code(Code &&other) noexcept { std::swap(bytes, other.bytes); };
-
-    Code(const Code &other);
-
-    Code &operator=(Code other) {
-        swap(bytes, other.bytes);
-        return *this;
-    };
-
-    bool operator==(const Code &other) const;
-
-    ~Code() { delete[] bytes; };
-};*/
