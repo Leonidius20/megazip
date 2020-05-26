@@ -35,6 +35,7 @@ void pack(const vector<string> &files, const string &outputFile) {
 
     for (const string &file : files) {
         cout << "Processing file " << file << "... ";
+        cout.flush();
 
         ifstream inputStream(file, ios::in | ios::binary);
         if (!inputStream.is_open()) {
