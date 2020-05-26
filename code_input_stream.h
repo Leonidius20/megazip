@@ -1,5 +1,4 @@
-#ifndef MEGAZIP_CODE_INPUT_STREAM_H
-#define MEGAZIP_CODE_INPUT_STREAM_H
+#pragma once
 
 #include <fstream>
 #include "code.h"
@@ -18,6 +17,3 @@ public:
 
     explicit operator bool() { return !eof; }
 };
-
-
-#endif //MEGAZIP_CODE_INPUT_STREAM_H

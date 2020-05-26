@@ -1,5 +1,4 @@
-#ifndef MEGAZIP_CODE_TABLE_H
-#define MEGAZIP_CODE_TABLE_H
+#pragma once
 
 #include <unordered_map>
 #include <string>
@@ -27,6 +26,3 @@ public:
 
     [[nodiscard]] bool contains(const Code &code) const { return table.contains(code); };
 };
-
-
-#endif //MEGAZIP_CODE_TABLE_H
