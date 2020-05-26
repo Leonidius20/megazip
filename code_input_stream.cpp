@@ -21,6 +21,8 @@ CodeInputStream &operator>>(CodeInputStream &stream, Code &code) {
         code = Code((uint16_t(bytes[0]) << 4u) | (uint16_t(bytes[1]) >> 4u));
         stream.cachedCode = new Code(
                 ((uint16_t(bytes[1]) & 0xFu) << 8u) | uint16_t(bytes[2]));
+
+        delete[] bytes;
     }
 
     stream.eof = (code == Code::END_OF_FILE);
