@@ -23,10 +23,12 @@ void unpack(const string &file) {
         fileName[fileNameLength] = '\0';
 
         cout << "Decompressing file " << fileName << "... ";
+        cout.flush();
 
         if (filesystem::exists(fileName)) {
             cerr << endl
                  << "File is not empty. Recreating it... ";
+            cerr.flush();
             filesystem::remove(fileName);
         }
 
