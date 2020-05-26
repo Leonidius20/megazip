@@ -2,9 +2,6 @@
 
 #include <unordered_map>
 #include <string>
-#include <vector>
-#include <cstddef>
-#include <memory>
 #include "code.h"
 
 class StringTable {

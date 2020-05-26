@@ -1,7 +1,5 @@
 #include <string>
 #include <iostream>
-#include <climits>
-#include <stdexcept>
 #include "code.h"
 #include "string_table.h"
 

@@ -1,6 +1,4 @@
 #include "code_table.h"
-#include <climits>
-#include <stdexcept>
 
 using namespace std;
 
