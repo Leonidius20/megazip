@@ -25,3 +25,13 @@ public:
 
     [[nodiscard]] unsigned short toShort() const { return bytes; };
 };
+
+namespace std {
+
+    template<>
+    struct hash<Code> {
+        size_t operator()(const Code &key) const {
+            return hash<unsigned short>()(key.toShort());
+        }
+    };
+}

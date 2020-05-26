@@ -2,18 +2,19 @@
 #define MEGAZIP_CODE_INPUT_STREAM_H
 
 #include <fstream>
+#include "code.h"
 
 class CodeInputStream {
 
     std::ifstream *input;
 
-    unsigned short *cachedCode = nullptr;
+    Code *cachedCode = nullptr;
     bool eof = false;
 public:
 
     explicit CodeInputStream(std::ifstream *input) : input(input) {}
 
-    friend CodeInputStream &operator>>(CodeInputStream &stream, unsigned short &code);
+    friend CodeInputStream &operator>>(CodeInputStream &stream, Code &code);
 
     explicit operator bool() { return !eof; }
 };

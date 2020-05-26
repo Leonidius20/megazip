@@ -3,11 +3,9 @@
 
 using namespace std;
 
-#define COMPRESS_EOF 0xFFF // 2^12 - 1
-
-CodeInputStream &operator>>(CodeInputStream &stream, unsigned short &code) {
+CodeInputStream &operator>>(CodeInputStream &stream, Code &code) {
     if (stream.eof) {
-        throw exception();
+        throw runtime_error("EOF");
     }
 
     if (stream.cachedCode != nullptr) {
@@ -20,11 +18,11 @@ CodeInputStream &operator>>(CodeInputStream &stream, unsigned short &code) {
         byte *bytes = new byte[size];
         stream.input->read(reinterpret_cast<char *>(bytes), size);
 
-        code = (uint16_t(bytes[0]) << 4u) | (uint16_t(bytes[1]) >> 4u);
-        stream.cachedCode = new unsigned short(
+        code = Code((uint16_t(bytes[0]) << 4u) | (uint16_t(bytes[1]) >> 4u));
+        stream.cachedCode = new Code(
                 ((uint16_t(bytes[1]) & 0xFu) << 8u) | uint16_t(bytes[2]));
     }
 
-    stream.eof = (code == COMPRESS_EOF);
+    stream.eof = (code == Code::END_OF_FILE);
     return stream;
 }

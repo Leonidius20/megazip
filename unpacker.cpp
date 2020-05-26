@@ -6,6 +6,7 @@
 #include <string>
 #include "code_table.h"
 #include "code_input_stream.h"
+#include "code.h"
 
 using namespace std;
 
@@ -64,7 +65,7 @@ unsigned int readInt(ifstream &input) {
 void decompress(CodeInputStream &input, ofstream &output) {
     CodeTable table;
 
-    unsigned short code;
+    Code code;
     bool firstRead = true;
     while (input >> code) {
         string value = table.getValue(code);
@@ -81,7 +82,7 @@ void decompress(CodeInputStream &input, ofstream &output) {
 }
 
 void appendToLastEntry(const char c, CodeTable &table) {
-    unsigned short lastCodeInDictionary = table.getLastCode();
+    Code lastCodeInDictionary = table.getLastCode();
     string lastValueFromDictionary = table.getValue(lastCodeInDictionary);
 
     lastValueFromDictionary += c;

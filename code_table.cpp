@@ -11,7 +11,7 @@ CodeTable::CodeTable() {
     }
 }
 
-void CodeTable::updateValue(const unsigned short &code, const string &value) {
+void CodeTable::updateValue(const Code &code, const string &value) {
     if (!table.contains(code)) {
         throw std::out_of_range("Cannot update value that's not in table.");
     }
@@ -19,8 +19,8 @@ void CodeTable::updateValue(const unsigned short &code, const string &value) {
 }
 
 void CodeTable::putValue(const string &value) {
-    unsigned short newCode = getLastCode() + 1;
-    if (newCode <= MAX_CODE) {
+    Code newCode = ++getLastCode();
+    if (newCode.toShort() < Code::END_OF_FILE.toShort()) {
         table[newCode] = value;
     }
 }
