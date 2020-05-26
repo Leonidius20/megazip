@@ -26,6 +26,8 @@ public:
     void updateValue(const unsigned short &code, const std::string &value);
 
     void putValue(const std::string &value);
+
+    [[nodiscard]] bool contains(const unsigned short &code) const { return table.contains(code); };
 };
 
 
