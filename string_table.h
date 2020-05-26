@@ -5,15 +5,17 @@
 #include <vector>
 #include <cstddef>
 #include <memory>
+#include "code.h"
 
 class StringTable {
-    std::unordered_map<std::string, std::unique_ptr<std::byte>> table;
+    std::unordered_map<std::string, Code> table;
+    Code lastCode;
 public:
     StringTable();
 
-    std::byte *getCode(const std::string &key) const { return table.at(key).get(); };
+    [[nodiscard]] Code const &getCode(const std::string &key) const { return table.at(key); };
 
-    bool contains(const std::string &key) const { return table.contains(key); }
+    [[nodiscard]] bool contains(const std::string &key) const { return table.contains(key); }
 
-    void addCode(const std::string &key);
+    bool addCode(const std::string &key);
 };
