@@ -21,6 +21,7 @@ void unpack(const string &file) {
 
         char *fileName = new char[fileNameLength + 1]; // +1 for '\0'
         input.read(fileName, fileNameLength);
+        fileName[fileNameLength] = '\0';
 
         cout << "Decompressing file " << fileName << "... ";
 
@@ -37,7 +38,7 @@ void unpack(const string &file) {
 
         output.close();
 
-        cout << "Done.";
+        cout << "Done." << endl;
 
         delete[] fileName;
     }
