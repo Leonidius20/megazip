@@ -7,11 +7,11 @@
 
 using namespace std;
 
-StringTable::StringTable() : lastCode(UCHAR_MAX) {
-    for (unsigned char b = 0; b < UCHAR_MAX; ++b) {
+StringTable::StringTable() : lastCode(MAX_UCHAR) {
+    for (unsigned char b = 0; b < MAX_UCHAR; ++b) {
         table[string(1, b)] = Code(b);
     }
-    table[string(1, UCHAR_MAX)] = Code(UCHAR_MAX);
+    table[string(1, MAX_UCHAR)] = Code(MAX_UCHAR);
 }
 
 bool StringTable::addCode(const string &key) {

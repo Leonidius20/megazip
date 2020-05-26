@@ -5,10 +5,10 @@
 using namespace std;
 
 CodeTable::CodeTable() {
-    for (unsigned int c = 0; c <= UCHAR_MAX; ++c) {
-        string value(1, char(c));
-        putValue(value);
+    for (unsigned char c = 0; c < MAX_UCHAR; ++c) {
+        putValue(string(1, c));
     }
+    putValue(string(1, MAX_UCHAR));
 }
 
 void CodeTable::putValue(const string &value) {

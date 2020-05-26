@@ -5,6 +5,8 @@
 #include <stdexcept>
 #include <cmath>
 
+const unsigned char MAX_UCHAR = std::numeric_limits<unsigned char>::max();
+
 class Code {
     unsigned short bytes = 0;
 public:
