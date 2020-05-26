@@ -9,8 +9,8 @@ void CodeOutputStream::operator<<(const Code &code) {
         return;
     } else {
         byte firstByte = byte(savedCode.bytes >> 4u);
-        byte secondByte = byte(((savedCode.bytes & 0b000000001111u) << 4u) + (code.bytes >> 8u));
-        byte thirdByte = byte(code.bytes & 0b000011111111u);
+        byte secondByte = byte(((savedCode.bytes & 0xFu) << 4u) + (code.bytes >> 8u));
+        byte thirdByte = byte(code.bytes & 0xFFu);
 
         stream.write(reinterpret_cast<const char *>(&firstByte), 1);
         stream.write(reinterpret_cast<const char *>(&secondByte), 1);
