@@ -4,8 +4,8 @@
 #include <vector>
 #include <string>
 #include "string_table.h"
-#include "packer.h"
 #include "code_output_stream.h"
+#include "packer.h"
 
 using namespace std;
 
@@ -16,7 +16,7 @@ void compress(istream &input, CodeOutputStream &output) {
     char c;
     string currentString;
     while (input.get(c)) {
-        currentString = currentPrefix + string(1, c); // move prob not needed here
+        currentString = currentPrefix + string(1, c);
         if (table.contains(currentString)) {
             currentPrefix = move(currentString);
         } else {
