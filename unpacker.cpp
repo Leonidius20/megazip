@@ -12,8 +12,6 @@ using namespace std;
 
 unsigned int readInt(ifstream &input);
 
-void appendToLastEntry(char c, CodeTable &table);
-
 void unpack(const string &file) {
     ifstream input(file, ios::in | ios::binary);
 
@@ -33,7 +31,7 @@ void unpack(const string &file) {
         }
 
         CodeInputStream codeStream(&input);
-        ofstream output(fileName);
+        ofstream output(fileName, ios::out | ios::binary);
 
         decompress(codeStream, output);
 
@@ -65,26 +63,27 @@ unsigned int readInt(ifstream &input) {
 void decompress(CodeInputStream &input, ofstream &output) {
     CodeTable table;
 
-    Code code;
-    bool firstRead = true;
+    Code oldCode, code;
+    string oldValue, value;
+
+    input >> code;
+    output << table.getValue(code);
+    oldCode = code;
+
     while (input >> code) {
-        string value = table.getValue(code);
-
-        if (!firstRead) {
-            appendToLastEntry(value[0], table);
-            value = table.getValue(code); // value might've been updated.
+        if (table.contains(code)) {
+            value = table.getValue(code);
+            output.write(value.c_str(), value.length());
+            oldValue = table.getValue(oldCode);
+            table.putValue(oldValue + value[0]);
+            oldCode = code;
+        } else {
+            oldValue = table.getValue(oldCode);
+            value = oldValue + oldValue[0];
+            output.write(value.c_str(), value.length());
+            table.putValue(value);
+            oldCode = code;
         }
-        firstRead = false;
 
-        output << value;
-        table.putValue(value);
     }
-}
-
-void appendToLastEntry(const char c, CodeTable &table) {
-    Code lastCodeInDictionary = table.getLastCode();
-    string lastValueFromDictionary = table.getValue(lastCodeInDictionary);
-
-    lastValueFromDictionary += c;
-    table.updateValue(lastCodeInDictionary, lastValueFromDictionary);
 }
