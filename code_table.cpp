@@ -4,9 +4,9 @@ using namespace std;
 
 CodeTable::CodeTable() {
     for (unsigned char c = 0; c < MAX_UCHAR; ++c) {
-        putValue(string(1, c));
+        table[Code(c)] = string(1, c);
     }
-    putValue(string(1, MAX_UCHAR));
+    table[Code(MAX_UCHAR)] = string(1, MAX_UCHAR);
 }
 
 void CodeTable::putValue(const string &value) {
