@@ -16,7 +16,7 @@ public:
 
     Code() = default;
 
-    explicit Code(short bytes) {
+    explicit Code(unsigned short bytes) {
         if (bytes > pow(2, 12) - 1) throw std::invalid_argument("Code value is out of bounds");
         this->bytes = bytes;
     };
